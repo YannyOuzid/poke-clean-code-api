@@ -1,11 +1,38 @@
 {
-    "pokemons": [
-        {
-            "id": "1",
-            "name": "Pikachu",
-            "number": 25,
-            "type": ["Electrik"],
-            "attacks": ["bim", "bam"]
-        }
-    ]
+  "pokemons": [
+    {
+      "id": "1",
+      "name": "Pikachu",
+      "number": 25,
+      "type": [
+        "Electrik"
+      ],
+      "attacks": [
+        "bim",
+        "bam"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "zfezgvergqe",
+      "number": 25,
+      "type": [
+        "sdfcdcs"
+      ],
+      "attacks": [
+        "fdq",
+        "bam"
+      ]
+    },
+    {
+      "name": "dfdf",
+      "number": 33,
+      "id": "ONOCf4N"
+    },
+    {
+      "name": "",
+      "number": 33,
+      "id": "lrf57Hk"
+    }
+  ]
 }
