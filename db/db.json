@@ -1,0 +1,11 @@
+{
+    "pokemons": [
+        {
+            "id": "1",
+            "name": "Pikachu",
+            "number": 25,
+            "type": ["Electrik"],
+            "attacks": ["bim", "bam"]
+        }
+    ]
+}
