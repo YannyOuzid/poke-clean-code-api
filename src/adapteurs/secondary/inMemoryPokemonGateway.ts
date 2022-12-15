@@ -1,12 +1,22 @@
 import { Pokemon } from "../../core/entities/pokemon";
 import { PokemonGateway } from "../../core/gateways/pokemonGateway";
+import { UUIDGenerator } from '../../core/gateways/UUIDGenerator'
 
 export class InMemoryPokemonGateway implements PokemonGateway {
     private pokemons: Array<Pokemon> = [];
+    private uuidGenerator: UUIDGenerator
 
-    feedWith(...pokemons: Array<Pokemon>) {
+    constructor(uuidGenerator: UUIDGenerator) {
+        this.uuidGenerator = uuidGenerator
+      }
+
+    feedWith(...pokemons: Pokemon[]) {
         this.pokemons = pokemons
       }
+
+    feedArray(pokemons: Pokemon[]) {
+        this.pokemons = pokemons
+    }
 
     listAll(): Promise<Array<Pokemon>> {
         this.verification(this.pokemons.length === 0, 'There is no Pokemon')
@@ -32,18 +42,17 @@ export class InMemoryPokemonGateway implements PokemonGateway {
     }
 
     postPokemon(body: Pokemon): Promise<Pokemon[]> {
-        this.verification(!body.name || !body.number || !body.type || !body.id, 'Missing informations to POST Pokemon');
+        this.verification(!body.name || !body.number || body.type.length === 0 || !body.id, 'Missing informations to POST Pokemon');
+        body.id = this.uuidGenerator.generate();
         this.pokemons.push(body);
         return Promise.resolve(this.pokemons);
     }
 
     updatePokemon(body: Pokemon): Promise<Pokemon[]> {
-        this.verification(!body.name || !body.number || !body.type || !body.id, 'Missing informations to UPDATE Pokemon');
+        this.verification(!body.name || !body.number || body.type.length === 0 || !body.id, 'Missing informations to UPDATE Pokemon');
 
         const pokemonIndex = this.findPokemonIndex(body.id)
-
-        this.verification(pokemonIndex === -1, 'There is no pokemon with that ID' + body.id)
-
+        
         if(pokemonIndex > -1) {
             this.pokemons[pokemonIndex] = body
         }
@@ -58,6 +67,8 @@ export class InMemoryPokemonGateway implements PokemonGateway {
     }
 
     private findPokemonIndex(pokemonId: string) {
-        return this.pokemons.findIndex(element => element.id === pokemonId)
+        const pokemonIndex = this.pokemons.findIndex(element => element.id === pokemonId)
+        this.verification(pokemonIndex === -1, 'There is no pokemon with that ID ' + pokemonId)
+        return pokemonIndex
     }
 }

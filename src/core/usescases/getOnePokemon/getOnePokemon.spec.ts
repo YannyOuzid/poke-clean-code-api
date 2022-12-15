@@ -1,6 +1,7 @@
 import { InMemoryPokemonGateway } from '../../../adapteurs/secondary/inMemoryPokemonGateway'
 import { getOnePokemon } from './getOnePokemon'
 import { Pokemon } from '../../entities/pokemon'
+import { FakeUUIDGenerator} from '../../../adapteurs/secondary/fakeUUIDGenerator'
 
 describe('Get One Pokemon', () => {
     const inject: Pokemon = { 
@@ -19,7 +20,7 @@ describe('Get One Pokemon', () => {
     }
     let pokemonGateway: InMemoryPokemonGateway;
     beforeEach(() => {
-        pokemonGateway = new InMemoryPokemonGateway();
+        pokemonGateway = new InMemoryPokemonGateway(new FakeUUIDGenerator());
     }) 
     it('should get One Pokemon by his Id number', async () => {
         pokemonGateway.feedWith(inject, secondInject)

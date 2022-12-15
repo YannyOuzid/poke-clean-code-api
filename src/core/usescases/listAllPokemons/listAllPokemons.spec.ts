@@ -1,6 +1,7 @@
 import { InMemoryPokemonGateway } from '../../../adapteurs/secondary/inMemoryPokemonGateway';
 import { Pokemon } from '../../entities/pokemon';
 import { listAllPokemons } from './listAllPokemons';
+import { FakeUUIDGenerator} from '../../../adapteurs/secondary/fakeUUIDGenerator'
 
 describe('List All Pokemons', () => {
     const inject: Pokemon = { 
@@ -19,7 +20,7 @@ describe('List All Pokemons', () => {
     }
     let pokemonGateway: InMemoryPokemonGateway
     beforeEach(() => {
-        pokemonGateway = new InMemoryPokemonGateway()
+        pokemonGateway = new InMemoryPokemonGateway(new FakeUUIDGenerator());
     })
 
     it('should list all pokemons', async () => {
