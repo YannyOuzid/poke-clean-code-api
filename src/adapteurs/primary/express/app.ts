@@ -3,8 +3,6 @@ import { listAllPokemons } from '../../../core/usescases/listAllPokemons/listAll
 import { pokemonGateway } from '../dependencies'
 
 export const app = express()
-
-
 app.use(express.json())
 
 app.get('/pokemons', async (req: any, res: any) => {

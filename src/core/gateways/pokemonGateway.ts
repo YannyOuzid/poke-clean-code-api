@@ -1,6 +1,4 @@
 import { Pokemon } from "../entities/pokemon";
-import { deletePokemon } from "../usescases/deletePokemon/deletePokemon";
-
 export interface PokemonGateway {
     listAll(): Promise<Array<Pokemon>>
     getPokemonByID(pokemonId): Promise<Pokemon>
