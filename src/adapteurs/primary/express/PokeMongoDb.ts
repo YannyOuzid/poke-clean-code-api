@@ -29,11 +29,11 @@ app.post('/pokeMongo', (req, res) => {
 })
 
 app.delete('/pokemonMongo', async (req, res) =>{
-    deletePokemon(res, req, pokeCollection)
+    deletePokemon(req, res, pokeCollection)
 })
 
 app.put('/pokemonMongo', async (req, res) => {
-    updatePokemon(res, req, pokeCollection)
+    updatePokemon(req, res, pokeCollection)
 })
 
 async function run() {
